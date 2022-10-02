@@ -7,21 +7,32 @@ public class BabyExpressions : MonoBehaviour
     public float _maxIntensity { set; get; }
     private SkinnedMeshRenderer skin;
 
+    public bool globalIntensity = false;
+    
     [SerializeField]
     private int[] blendShapesList;
+    
+
 
     private int bandCount = 0;
     private const int MAX_BAND = 7;
     private const int MIN_BAND = 0;
 
+    // blend index, band
     private Dictionary<int, int> bandDictionary;
+    
+    // blend index, toggle
     private Dictionary<int, bool> activeBlend;
+    
+    // blend index, intensity(active, min, max)
+    private Dictionary<int, (bool toggle, float min, float max)> individualIntensity;
 
     void Awake()
     {
         skin = GetComponent<SkinnedMeshRenderer>();
         bandDictionary = new Dictionary<int, int>();
         activeBlend = new Dictionary<int, bool>();
+        individualIntensity = new Dictionary<int, (bool toggle, float min, float max)>();
         _minIntensity = 0;
         _maxIntensity = 75;
     }
@@ -34,37 +45,68 @@ public class BabyExpressions : MonoBehaviour
             bandCount = bandCount >= MAX_BAND ? MIN_BAND :  bandCount+1;
             
             activeBlend.Add(blend, true);
-        }
-
-        if (blendShapesList.Length > 4)
-        {
-            foreach (var v in bandDictionary)
-            {
-                Debug.Log("Key: " + v.Key + " | Val: " + v.Value);
-            }
+            individualIntensity.Add(blend, (true, 0, 100));
         }
     }
 
     void Update()
     {
-        foreach (var blend in blendShapesList)
+        foreach (var blendIndex in blendShapesList)
         {
-            if (!activeBlend[blend])
+            if (!activeBlend[blendIndex])
             {
-                skin.SetBlendShapeWeight(blend,0);
+                skin.SetBlendShapeWeight(blendIndex,0);
+                continue;
+            }
+
+            if (individualIntensity[blendIndex].toggle)
+            {
+                skin.SetBlendShapeWeight(
+                    blendIndex,
+                    (AudioPeer._audioBandBuffer[bandDictionary[blendIndex]] * (
+                        individualIntensity[blendIndex].max - individualIntensity[blendIndex].min)
+                        ) + individualIntensity[blendIndex].min
+                );
                 continue;
             }
             
             skin.SetBlendShapeWeight(
-                blend,
-                (AudioPeer._audioBandBuffer[bandDictionary[blend]] * (_maxIntensity - _minIntensity)) + _minIntensity
+                blendIndex,
+                (AudioPeer._audioBandBuffer[bandDictionary[blendIndex]] * (_maxIntensity - _minIntensity)) + _minIntensity
             );
         }
     }
-
+    
     public void SwitchBlend(int blendID)
     {
         activeBlend[blendID] = !activeBlend[blendID];
+    }
+
+    public void SetIndividualBlendIntensityMax(SliderWrapper sw)
+    {
+        individualIntensity[sw.blendIndex] = (
+            individualIntensity[sw.blendIndex].toggle,
+            individualIntensity[sw.blendIndex].min,
+            sw.floatValue
+            );
+    }
+    
+    public void SetIndividualBlendIntensityMin(SliderWrapper sw)
+    {
+        individualIntensity[sw.blendIndex] = (
+            individualIntensity[sw.blendIndex].toggle,
+            sw.floatValue,
+            individualIntensity[sw.blendIndex].max
+        );
+    }
+
+    public void ToggleIndividualIntensity(SliderWrapper sw)
+    {
+        individualIntensity[sw.blendIndex] = (
+                sw.boolValue, 
+                individualIntensity[sw.blendIndex].min, 
+                individualIntensity[sw.blendIndex].max
+                );
     }
     
 }
