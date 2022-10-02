@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 public class BabyExpressions : MonoBehaviour
 {
-    public float _minIntensity, _maxIntensity;
+    public float _minIntensity { set; get; }
+    public float _maxIntensity { set; get; }
     private SkinnedMeshRenderer skin;
 
     [SerializeField]
@@ -21,6 +22,8 @@ public class BabyExpressions : MonoBehaviour
         skin = GetComponent<SkinnedMeshRenderer>();
         bandDictionary = new Dictionary<int, int>();
         activeBlend = new Dictionary<int, bool>();
+        _minIntensity = 0;
+        _maxIntensity = 75;
     }
     
     void Start ()
@@ -31,6 +34,14 @@ public class BabyExpressions : MonoBehaviour
             bandCount = bandCount >= MAX_BAND ? MIN_BAND :  bandCount+1;
             
             activeBlend.Add(blend, true);
+        }
+
+        if (blendShapesList.Length > 4)
+        {
+            foreach (var v in bandDictionary)
+            {
+                Debug.Log("Key: " + v.Key + " | Val: " + v.Value);
+            }
         }
     }
 
@@ -55,4 +66,5 @@ public class BabyExpressions : MonoBehaviour
     {
         activeBlend[blendID] = !activeBlend[blendID];
     }
+    
 }
