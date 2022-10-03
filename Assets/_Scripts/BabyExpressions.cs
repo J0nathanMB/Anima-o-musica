@@ -27,6 +27,19 @@ public class BabyExpressions : MonoBehaviour
     // blend index, intensity(active, min, max)
     private Dictionary<int, (bool toggle, float min, float max)> individualIntensity;
 
+    public static Dictionary<int, float> defaultIndividualIntensity =
+        new()
+        {
+            {17, 57.0f},
+            {6, 69.0f},
+            {11, 30.0f},
+            {13, 60.0f},
+            {15, 50.0f},
+            {18, 40.0f},
+            {4, 80.0f},
+            {20, 70.0f}
+        };
+
     void Awake()
     {
         skin = GetComponent<SkinnedMeshRenderer>();
@@ -45,7 +58,15 @@ public class BabyExpressions : MonoBehaviour
             bandCount = bandCount >= MAX_BAND ? MIN_BAND :  bandCount+1;
             
             activeBlend.Add(blend, true);
-            individualIntensity.Add(blend, (true, 0, 100));
+            individualIntensity.Add(
+                blend, 
+                (
+                    true,
+                    0,
+                    defaultIndividualIntensity.ContainsKey(blend) && blendShapesList.Length > 5 ? defaultIndividualIntensity[blend] : 100
+                )
+            );
+
         }
     }
 
