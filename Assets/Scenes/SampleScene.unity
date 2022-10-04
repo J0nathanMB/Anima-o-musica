@@ -2854,7 +2854,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &245229455
 Light:
   m_ObjectHideFlags: 0
@@ -15194,7 +15194,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: fd4f33cd4aee3904d8f3c1c062afaa2e, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -15315,6 +15315,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 26217095b50df9043bd036710dc29e11, type: 3}
   - {fileID: 8300000, guid: b671af7c34b5f8d44a155b4d02f8f06e, type: 3}
   - {fileID: 8300000, guid: 7d9f89fb1c8f0da4687735d3df596f42, type: 3}
+  - {fileID: 8300000, guid: 325cb3ab0988fdf46af7f60a063e4be6, type: 3}
+  - {fileID: 8300000, guid: 3491e88ae65a55343962e2b40b914778, type: 3}
+  - {fileID: 8300000, guid: a92fbefd62c5352469a80556434a04b2, type: 3}
+  - {fileID: 8300000, guid: c6d6d7dd408977042af3bdb3249bef17, type: 3}
+  - {fileID: 8300000, guid: c78d00667751f6e47896b67ae2e24dcc, type: 3}
   musicsLabels:
   - King - Ironmouse
   - Blind Alley
@@ -15323,6 +15328,11 @@ MonoBehaviour:
   - Portal - Still Alive
   - Sabaton - Primo Victoria
   - Sabaton - Winged Hussars
+  - Tim Maia - Descobridores Dos Sete Mares
+  - Michael Jackson - Billie Jean
+  - Dont Stop Me Now - Queen
+  - Hotel California - Eagles
+  - Aaron Smith - Dancin
 --- !u!1 &1604497178 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 129616, guid: 55be7fbee532e9245a6c7a5ff747297f, type: 3}
