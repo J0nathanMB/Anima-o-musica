@@ -2085,7 +2085,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _band: 5
-  _minIntensity: 1
+  _minIntensity: 4
   _maxIntensity: 8
 --- !u!1 &193104709
 GameObject:
@@ -3771,7 +3771,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _band: 7
-  _minIntensity: 1
+  _minIntensity: 4
   _maxIntensity: 8
 --- !u!114 &348914956 stripped
 MonoBehaviour:
@@ -8232,7 +8232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _band: 3
-  _minIntensity: 1
+  _minIntensity: 4
   _maxIntensity: 8
 --- !u!1 &779309707
 GameObject:
@@ -16784,7 +16784,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _band: 2
-  _minIntensity: 1
+  _minIntensity: 4
   _maxIntensity: 8
 --- !u!1 &1709083899
 GameObject:
